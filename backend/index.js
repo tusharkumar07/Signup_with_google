@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const nodemailer = require('nodemailer');
 
 const User = require("./database/user.js"); // Load environment variables from .env file
 
@@ -20,6 +21,51 @@ mongoose
   .catch((err) => {
     console.log(`Error in connecting Dtabase : ${err}`);
   });
+
+  // Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// POST route to handle form submission
+app.post('/contactUs', (req, res) => {
+  const { name, phone, email, address, subject, message } = req.body;
+
+  // Create a transporter object using SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth:{
+      user:"tusharpathania07@gmail.com",
+      pass:"pmmd exuk qiuu cnmj"
+  }
+  });
+
+  // Email content
+  let mailOptions = {
+    from: email,
+    to: 'tusharkumar0510@gmail.com', // Recipient email
+    subject: 'New Contact Form Submission',
+    html: `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `
+  };
+
+  // Send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log("Error sending email:", error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.send(true);
+    }
+  });
+});
+
 
   app.get("/login",async (req,res)=>{
     try {

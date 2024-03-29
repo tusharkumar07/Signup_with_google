@@ -36,7 +36,7 @@ const Signup = () => {
       console.error('Error submitting data:', error);
       window.alert('Error submitting data. Please try again.');
 
-      navigate('/signup')
+      navigate('/')
     }
   };
 
