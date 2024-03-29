@@ -29,7 +29,7 @@ const Login = () => {
           },
         });
         window.alert("Loged in User!")
-        navigate('/');
+        navigate('/home');
         console.log('Server Response:', response.data);
       } catch (error) {
           window.alert("Some login issue")

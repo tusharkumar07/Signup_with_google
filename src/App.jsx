@@ -9,10 +9,10 @@ export default function App() {
   return (
     <BrowserRouter>
   <Routes>
-    <Route path='/' element={<Header/>}></Route>
+    {/* <Route path='/' element={<Header/>}></Route> */}
     <Route path='/home' element={<Home/>}></Route>
     <Route path='/about' element={<About/>}></Route>
-    <Route path="/signup" element={<Signup/>}></Route>
+    <Route path="/" element={<Signup/>}></Route>
     <Route path="/login" element={<Login/>}></Route>
     <Route path="/googlelogin" element={<GoogleLogin/>}></Route>
   </Routes>
