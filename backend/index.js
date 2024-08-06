@@ -35,7 +35,7 @@ app.post('/contactUs', (req, res) => {
     service: 'gmail',
     auth:{
       user:"tusharpathania07@gmail.com",
-      pass:"pmmd exuk qiuu cnmj"
+      pass:"app pass"
   }
   });
 
